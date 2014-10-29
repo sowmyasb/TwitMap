@@ -2,19 +2,95 @@
 <html>
   <head>
     <style type="text/css">
-      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+       #map-canvas { height: 200px; margin: 10; padding: 0;}
     </style>
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTHW-i7oTS_w1qPUCcXIGdi9LrI4V4cpo">
     </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript">
+    function WebSocketTest()
+    {
+      if ("WebSocket" in window)
+      {
+         alert("WebSocket is supported by your Browser!");
+         // Let us open a web socket
+         var ws = new WebSocket("ws://localhost:9998/echo");
+         ws.onopen = function()
+         {
+            // Web Socket is connected, send data using send()
+            ws.send("Message to send");
+            alert("Message is sent...");
+         };
+         ws.onmessage = function (evt) 
+         { 
+            var received_msg = evt.data;
+            alert("Message is received...");
+         };
+         ws.onclose = function()
+         { 
+            // websocket is closed.
+            alert("Connection is closed..."); 
+         };
+      }
+      else
+      {
+         // The browser doesn't support WebSocket
+         alert("WebSocket NOT supported by your Browser!");
+      }
+    }
       function initialize() {
+    	  var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+    	  var taxiData = [
+    	                  new google.maps.LatLng(37.782551, -122.445368),
+    	                  new google.maps.LatLng(37.782745, -122.444586),
+    	                  new google.maps.LatLng(37.782842, -122.443688),
+    	                  new google.maps.LatLng(37.782919, -122.442815),
+    	                  new google.maps.LatLng(37.782992, -122.442112),
+    	                  new google.maps.LatLng(37.783100, -122.441461),
+    	                  new google.maps.LatLng(37.783206, -122.440829),
+    	                  new google.maps.LatLng(37.783273, -122.440324),
+    	                  new google.maps.LatLng(37.783316, -122.440023),
+    	                  new google.maps.LatLng(37.783357, -122.439794),
+    	                  new google.maps.LatLng(37.783371, -122.439687)];
+    	  
+    	 
+    	  
         var mapOptions = {
-          center: { lat: -34.397, lng: 150.644},
-          zoom: 8
+          center: myLatlng,
+          zoom: 3
         };
         var map = new google.maps.Map(document.getElementById('map-canvas'),
             mapOptions);
+        
+        var addresses = ['Norway', 'Africa', 'Asia','North America','South America'];
+
+         //for (var x = 0; x < addresses.length; x++) {
+          //  $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+addresses[x]+'&sensor=false', null, function (data) {
+                //var p = data.results[0].geometry.location
+               // var latlng = myLatlng
+                /* var marker =   new google.maps.Marker({
+                    position: latlng,
+                    map: map
+                }); */
+ 
+            //}); 
+        //} 
+         for (var x = 0; x < addresses.length; x++) {
+        	  $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+addresses[x]+'&sensor=false', null, function (data) {
+        		  var p = data.results[0].geometry.location
+        		  var latlng = new google.maps.LatLng(p.lat, p.lng);
+                  new google.maps.Marker({
+                      position: latlng,
+                      map: map
+                  });  
+        	  });
+         }
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: 'Hello World!'
+        });
       }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
