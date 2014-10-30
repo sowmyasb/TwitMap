@@ -10,7 +10,7 @@ import java.io.PrintWriter;
  */
 public class TwitMap  extends HttpServlet {
   private String message;
-  TweetGet getTweets;
+  protected TweetGet getTweets;
 
   public void init() {
     getTweets = new TweetGet();
@@ -19,12 +19,11 @@ public class TwitMap  extends HttpServlet {
 
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    // Set response content type
-    response.setContentType("text/html");
+    response.setContentType("application/json");
 
     // Actual logic goes here.
     PrintWriter out = response.getWriter();
-    out.println("<h1>" + message + "</h1>");
+    out.println(message);
   }
 
   public void destroy() {

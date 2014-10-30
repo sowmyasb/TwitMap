@@ -4,8 +4,8 @@
       function setupEventSource() {
         var output = document.getElementById("output");
         if (typeof(EventSource) !== "undefined") {
-          var msg = document.getElementById("textID").value;
-          var source = new EventSource("simplesse?msg=" + msg);
+          var msg = "Get Full Data";
+          var source = new EventSource("twitmap?msg=" + msg);
           source.onmessage = function(event) {
             output.innerHTML += event.data + "<br>";
           };
@@ -18,13 +18,9 @@
         }
         return false;
       }
+      window.onload = setupEventSource();
     </script>
-    <h2>SSE Echo Demo</h2>
-    <div>
-      <input type="text" id="textID" name="message" value="Hello World">
-      <input type="button" id="sendID" value="Send" onclick="setupEventSource()"/>
-    </div>
-    <hr/> 
+    <h2>Location Demo</h2>
     <div id="output"></div>
   </body> 
 </html>

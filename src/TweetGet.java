@@ -71,4 +71,8 @@ public final class TweetGet {
     }
     System.out.println("Update successful");
   }
+
+  public List<String> getLocationsFromDB() {
+    return helper.getLocations();
+  }
 }
