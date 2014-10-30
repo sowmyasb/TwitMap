@@ -79,6 +79,10 @@ public final class TweetGet {
     System.out.println("Update successful");
   }
 
+  public List<String> getLocationsForKeywordFromDB(String keyword) {
+	    return helper.getTweetAndLocations(keyword);
+	  }
+  
   public List<String> getLocationsFromDB() {
     return helper.getLocations();
   }

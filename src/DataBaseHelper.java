@@ -110,4 +110,38 @@ public class DataBaseHelper {
     return locations;
   }
 
+  public List<String> getTweetAndLocations(String keyword) {
+	    Statement statement = null;
+	    ResultSet rs = null;
+	    String sqlStatement = "SELECT content,location FROM "+tablename+" where content LIKE '%"+keyword+"%'";
+	    List<String> locations = new ArrayList<String>();
+	    try {
+	      statement = connection.createStatement();
+	      rs = statement.executeQuery(sqlStatement);
+	      while (rs.next()) {
+	    	  String tweet=rs.getString("content");
+	    	  if(tweet.contains(keyword))
+	        locations.add(rs.getString("location"));
+	      }
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	    } finally {
+	      if (rs != null) {
+	        try {
+	          rs.close();
+	        } catch (SQLException e) {
+	          e.printStackTrace();
+	        }
+	      }
+	      if (statement != null) {
+	        try {
+	          statement.close();
+	        } catch (SQLException e) {
+	          e.printStackTrace();
+	        }
+	      }
+	    }
+	    return locations;
+	  }
+
 }
