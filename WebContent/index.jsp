@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <style type="text/css">
-      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+      #map-canvas { height: 200px; margin: 0; padding: 0;}
     </style>
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTHW-i7oTS_w1qPUCcXIGdi9LrI4V4cpo">
@@ -20,86 +28,19 @@
     </script>
   </head>
   <body>
-<div id="map-canvas"></div>
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+        Dropdown
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+        <li role="presentation" class="divider"></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+      </ul>
+    </div>
+    <div id="map-canvas"></div>
   </body>
 </html>
-<%-- <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ page import="com.amazonaws.*" %>
-<%@ page import="com.amazonaws.auth.*" %>
-<%@ page import="com.amazonaws.services.ec2.*" %>
-<%@ page import="com.amazonaws.services.ec2.model.*" %>
-<%@ page import="com.amazonaws.services.s3.*" %>
-<%@ page import="com.amazonaws.services.s3.model.*" %>
-<%@ page import="com.amazonaws.services.dynamodbv2.*" %>
-<%@ page import="com.amazonaws.services.dynamodbv2.model.*" %>
-
-<%! // Share the client objects across threads to
-    // avoid creating new clients for each web request
-    private AmazonEC2         ec2;
-    private AmazonS3           s3;
-    private AmazonDynamoDB dynamo;
- %>
-
-<%
-    /*
-     * AWS Elastic Beanstalk checks your application's health by periodically
-     * sending an HTTP HEAD request to a resource in your application. By
-     * default, this is the root or default resource in your application,
-     * but can be configured for each environment.
-     *
-     * Here, we report success as long as the app server is up, but skip
-     * generating the whole page since this is a HEAD request only. You
-     * can employ more sophisticated health checks in your application.
-     */
-    if (request.getMethod().equals("HEAD")) return;
-%>
-
-<%
-    if (ec2 == null) {
-        AWSCredentialsProvider credentialsProvider = new ClasspathPropertiesFileCredentialsProvider();
-        ec2    = new AmazonEC2Client(credentialsProvider);
-        s3     = new AmazonS3Client(credentialsProvider);
-        dynamo = new AmazonDynamoDBClient(credentialsProvider);
-    }
-%>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>Hello AWS Web World!</title>
-    <link rel="stylesheet" href="styles/styles.css" type="text/css" media="screen">
-</head>
-<body>
-    <div id="content" class="container">
-        <div class="section grid grid5 s3">
-            <h2>Amazon S3 Buckets:</h2>
-            <ul>
-            <% for (Bucket bucket : s3.listBuckets()) { %>
-               <li> <%= bucket.getName() %> </li>
-            <% } %>
-            </ul>
-        </div>
-
-        <div class="section grid grid5 sdb">
-            <h2>Amazon DynamoDB Tables:</h2>
-            <ul>
-            <% for (String tableName : dynamo.listTables().getTableNames()) { %>
-               <li> <%= tableName %></li>
-            <% } %>
-            </ul>
-        </div>
-
-        <div class="section grid grid5 gridlast ec2">
-            <h2>Amazon EC2 Instances:</h2>
-            <ul>
-            <% for (Reservation reservation : ec2.describeInstances().getReservations()) { %>
-                <% for (Instance instance : reservation.getInstances()) { %>
-                   <li> <%= instance.getInstanceId() %></li>
-                <% } %>
-            <% } %>
-            </ul>
-        </div>
-    </div>
-</body>
-</html> --%>

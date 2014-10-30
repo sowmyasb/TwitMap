@@ -29,9 +29,9 @@ public class AWSLaunchInstance {
 
   
   public static void main(String[] args) {
-	  AWSElasticBeanstalkClient client=new AWSElasticBeanstalkClient();
+	  /*AWSElasticBeanstalkClient client=new AWSElasticBeanstalkClient();
 	  client.createApplication(createApplicationRequest);
-	  client.
+	  client.*/
   }
   
   public static void main2(String[] args) {
