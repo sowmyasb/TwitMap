@@ -4,23 +4,24 @@
       function setupEventSource() {
         var output = document.getElementById("output");
         if (typeof(EventSource) !== "undefined") {
-          var msg = "Get Full Data";
+          var msg = document.getElementById("textID").value;
           var source = new EventSource("twitmapsse?msg=" + msg);
           source.onmessage = function(event) {
             output.innerHTML += event.data + "<br>";
           };
-          source.addEventListener('close', function(event) {
-            output.innerHTML += event.data + "<hr/>";
-            source.close();
-            }, false);
         } else {
-          output.innerHTML = "Sorry, Server-Sent Events are not supported in your browser";
+          output.innerHTML = "Sorry, Server-Sent Event is not supported in your browser";
         }
         return false;
       }
-      window.onload = setupEventSource();
     </script>
-    <h2>Location Demo</h2>
+
+    <h2>Simple SSE Echo Demo</h2>
+    <div>
+      <input type="text" id="textID" name="message" value="Hello World">
+      <input type="button" id="sendID" value="Send" onclick="setupEventSource()"/>
+    </div>
+    <hr/>
     <div id="output"></div>
-  </body> 
+  </body>
 </html>

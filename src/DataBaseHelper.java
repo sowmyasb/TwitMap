@@ -43,7 +43,7 @@ public class DataBaseHelper {
     PreparedStatement statement = null;
     try {
       checkAndCreateTable();
-      String insertStatement = "INSERT INTO " + tablename + "VALUES(?,?,?,?)";
+      String insertStatement = "INSERT INTO " + tablename + " VALUES(?,?,?,?)";
       statement = connection.prepareStatement(insertStatement);
       for (TwitterStatus status : twitterStatusList) {
         statement.setString(1, status.getUserName());
@@ -52,6 +52,7 @@ public class DataBaseHelper {
         statement.setString(4, status.getContent());
         statement.addBatch();
       }
+     
       statement.executeBatch();
       connection.commit();
     } catch (SQLException e) {
@@ -70,11 +71,11 @@ public class DataBaseHelper {
   }
 
   private void checkAndCreateTable() throws SQLException {
-    String sqlStatement = "CREATE TABLE " + tablename + " IF NOT EXISTS " +
-        "(VARCHAR(100) username, BIGINT  tweetID, VARCHAR(100) location, " +
-        "VARCHAR(500) content)";
+    String sqlStatement = "CREATE TABLE IF NOT EXISTS "  + tablename +
+        "(username VARCHAR(100), tweetID BIGINT, location VARCHAR(100), " +
+        "content VARCHAR(500))";
     Statement stmt = connection.createStatement();
-    stmt.executeQuery(sqlStatement);
+    stmt.executeUpdate(sqlStatement);
   }
 
   public List<String> getLocations() {

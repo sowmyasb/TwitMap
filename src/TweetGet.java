@@ -14,12 +14,18 @@ public final class TweetGet {
 
   private void getTweets() {
     ConfigurationBuilder cb = new ConfigurationBuilder();
-    cb.setDebugEnabled(true)
-        .setOAuthConsumerKey("o7pdF4Z2Ip9jgWOYPdvcdCSrN")
+    
+     cb.setDebugEnabled(true)
+           .setOAuthConsumerKey("KZI4MpW52dWinfzjXlKfTrzKN")
+           .setOAuthConsumerSecret("ZzGjkXws3Bp2wzCd7mFqzlE6GK0HXhwi4Xfm8o7Px8auVDFJgD")
+           .setOAuthAccessToken("2848198209-fwp23E0HONFs0iQpGJt8ABPk8HM5J3XX8NrhaHS")
+           .setOAuthAccessTokenSecret("97BANAvxYHf4j7tFSW9t24i91d2zrVrXVnYrqd6XUxoB9");
+         
+       /* .setOAuthConsumerKey("o7pdF4Z2Ip9jgWOYPdvcdCSrN")
         .setOAuthConsumerSecret("vpqKS8MoJiiuGz9hjI0d6VXdnc8MLwMvUEmhxlsFWp3CLkWKuG")
         .setOAuthAccessToken("2850527037-T3nmJhuNAQixoEdbaFLQIzdCivDG4aAnG2WPheT")
         .setOAuthAccessTokenSecret("JsoGCmBJzOT0RkgRQMewZS7JuETeJaDz9LtqAUGyxpxin");
-
+*/
     TwitterStream twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
     StatusListener listener = new StatusListener() {
       @Override
@@ -31,7 +37,7 @@ public final class TweetGet {
         TwitterStatus newStatus = new TwitterStatus(username, tweetId,
             profileLocation, content);
         twitterStatusList.add(newStatus);
-        if (twitterStatusList.size() == 1000) {
+        if (twitterStatusList.size() == 10) {
           updateDB();
           twitterStatusList.clear();
         }
