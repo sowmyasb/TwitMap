@@ -5,7 +5,7 @@
         var output = document.getElementById("output");
         if (typeof(EventSource) !== "undefined") {
           var msg = "Get Full Data";
-          var source = new EventSource("twitmap?msg=" + msg);
+          var source = new EventSource("twitmapsse?msg=" + msg);
           source.onmessage = function(event) {
             output.innerHTML += event.data + "<br>";
           };

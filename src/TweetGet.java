@@ -6,7 +6,7 @@ import java.util.List;
 public final class TweetGet {
   private List<TwitterStatus> twitterStatusList = new
       ArrayList<TwitterStatus>();
-  private static final DataBaseHelper helper = new DataBaseHelper();
+  public static final DataBaseHelper helper = new DataBaseHelper();
 
   public TweetGet() {
     getTweets();
