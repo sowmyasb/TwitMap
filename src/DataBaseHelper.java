@@ -29,11 +29,11 @@ public class DataBaseHelper {
     String password = System.getProperty("RDS_PASSWORD");
     String hostname = System.getProperty("RDS_HOSTNAME");
     String port = System.getProperty("RDS_PORT");*/
-    String dbName = System.getProperty("TweetDB");
-    String userName = System.getProperty("annapurna");
-    String password = System.getProperty("Password123");
-    String hostname = System.getProperty("cloudassgninst.ct233hyipvfx.us-east-1.rds.amazonaws.com");
-    String port = System.getProperty("3306");
+    String dbName = "TweetDB";
+    String userName = "annapurna";
+    String password = "Password123";
+    String hostname = "cloudassgninst.ct233hyipvfx.us-east-1.rds.amazonaws.com";
+    String port = "3306";
     jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName +
         "?user=" + userName + "&password=" + password;
     System.out.println("JDBC URL to connect to :" + jdbcUrl);

@@ -33,6 +33,7 @@ public final class TweetGet {
         twitterStatusList.add(newStatus);
         if (twitterStatusList.size() == 1000) {
           updateDB();
+          twitterStatusList.clear();
         }
       }
 
