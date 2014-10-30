@@ -5,7 +5,7 @@
         var output = document.getElementById("output");
         if (typeof(EventSource) !== "undefined") {
           var msg = document.getElementById("textID").value;
-          var source = new EventSource("sseasync?msg=" + msg);
+          var source = new EventSource("simplesse?msg=" + msg);
           source.onmessage = function(event) {
             output.innerHTML += event.data + "<br>";
           };
